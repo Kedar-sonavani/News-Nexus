@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% if username %}
+    <h1>Welcome, {{ username }}!</h1>
+{% else %}
+    <h1>Welcome, Guest!</h1>
+{% endif %}
+
+{% if history %}
+    <h2>Your Interaction History:</h2>
+    <ul>
+    {% for item in history %}
+        <li>{{ item.article_title }} - {{ item.category }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No interaction history available.</p>
+{% endif %}
+
+
+<!-- Debugging Output -->
+<p>Debug Info:</p>
+<pre>User ID: {{ username}}</pre>
+<pre>History Count: {{ history|length }}</pre>
+<pre>Recommendations Count: {{ recommendations|length }}</pre>
+
+    </div>
+</body>
+</html>

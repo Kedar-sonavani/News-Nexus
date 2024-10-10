@@ -1,0 +1,294 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@500&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --nav-color: white;
+    --primary-text-color: #4280af;
+    --secondary-text-color: #577592;
+    --accent-color: #2294ed;
+    --accent-color-dark: #1d69a3;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: var(--primary-text-color);
+}
+
+.main-nav {
+    color: var(--nav-color);
+}
+
+p {
+    font-family: "Roboto", sans-serif;
+    color: var(--secondary-text-color);
+    line-height: 1.4rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+#language-select {
+    width: 100px;
+    height: 100%;
+    padding-inline: 5px;
+    border-radius: 4px;
+    border: 2px solid #bbd0e2;
+    font-family: "Roboto", sans-serif;
+    background-color: white;
+    cursor: pointer; /* Ensure cursor changes on hover */
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    max-width: 1180px;
+    margin-inline: auto;
+    overflow: hidden;
+}
+
+nav {
+    background-color: #000000;
+    box-shadow: 0 0 4px #bbd0e2;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    left: 0;
+    right: 0;
+}
+
+.main-nav {
+    justify-content: space-between;
+    padding-block: 8px;
+}
+
+.company-logo img {
+    width: 120px; 
+    height: auto; 
+}
+
+.nav-links ul {
+    gap: 16px;
+    display: flex; 
+}
+
+.hover-link {
+    cursor: pointer;
+}
+
+.hover-link:hover {
+    color: var(--secondary-text-color);
+}
+
+.hover-link:active {
+    color: red;
+}
+
+.nav-item.active {
+    color: var(--accent-color);
+}
+
+.search-bar {
+    height: 32px;
+    gap: 8px;
+}
+.sub-menu-wrap {
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    width: 320px;
+    max-height: 0; /* Changed from max-height: 0px to max-height: 0 for consistency */
+    overflow: hidden;
+    transition: max-height 0.5s ease; /* Added ease for smoother transition */
+}
+
+.sub-menu-wrap.open-menu {
+    max-height: 400px; /* Consider adjusting this value based on content */
+}
+
+.sub-menu {
+    background: #f9f9f9; /* Light background for visibility */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sub-menu h4 {
+    margin-bottom: 10px; /* Spacing below the heading */
+}
+
+.sub-menu ul {
+    padding-left: 20px; /* Indent for list items */
+}
+
+.sub-menu ul li {
+    margin: 5px 0; /* Spacing between list items */
+}
+
+
+.user-info {
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+.user-pic{
+    height: 57px;
+    width: 57px;
+}
+
+.user-info img {
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+
+.sub-menu-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #525252;
+    margin: 12px 0;
+    transition: background-color 0.3s;
+}
+
+.sub-menu-link:hover {
+    background-color: #e5e5e5; /* Highlight on hover */
+}
+
+.sub-menu-link img {
+    width: 40px;
+    background: #e5e5e5;
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.sub-menu-link span {
+    font-size: 22px;
+    transition: transform 0.5s;
+}
+
+.sub-menu-link:hover span {
+    transform: translateX(5px);
+}
+
+.sub-menu-link:hover p { /* Fixed typo: removed space before :hover */
+    font-weight: 600;
+}
+
+.news-input {
+    width: 200px;
+    height: 100%;
+    padding-inline: 12px;
+    border-radius: 4px;
+    border: 2px solid #bbd0e2;
+    font-family: "Roboto", sans-serif;
+}
+
+.search-button,
+#btn-main-login,
+#btn-recommendations { /* New button for recommendations */
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+#btn-main-login {
+    background-color: var(--accent-color-dark);
+}
+
+.search-button:hover,
+#btn-main-login:hover,
+#btn-recommendations:hover { /* Hover effect for buttons */
+    background-color: var(--accent-color-dark);
+}
+
+main {
+    padding-block: 20px;
+    margin-top: 80px;
+}
+
+.cards-container {
+    display: flex; 
+    justify-content: flex-start; 
+    flex-wrap: wrap; 
+    row-gap: 20px; 
+    column-gap: 20px; 
+}
+
+.card {
+    width: 360px; 
+    height: 400px; 
+    box-shadow: 0 0 4px #d4ecff; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    background-color: #fff; 
+    overflow: hidden; 
+    transition: all 0.3s ease; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.card-header {
+    flex-shrink: 0; 
+}
+
+.card-header img {
+    width: 100%; 
+    height: 180px; 
+    object-fit: cover; 
+}
+
+.card-content {
+    flex: 1; 
+    padding: 12px; 
+}
+
+.news-source {
+    margin-block: 12px; 
+}
+
+.card:hover {
+    box-shadow: 1px 1px 8px #d4ecff;
+    background-color: #f9fdff;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .dropdown-content button {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .news-input {
+        width: 150px; /* Adjust input width for mobile */
+    }
+
+    .search-button,
+    #btn-main-login {
+        padding: 6px 16px; /* Adjust button padding for mobile */
+    }
+
+    .card {
+        width: 100%; /* Make cards full width on mobile */
+        max-width: 360px; /* Maintain max width */
+    }
+}

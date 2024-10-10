@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized News App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="main-nav container flex">
+            <a href="#" onclick="reload()" class="company-logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="company logo" style="width: 120px; height: auto;">
+            </a>
+            <div class="nav-links">
+                <ul class="flex">
+                    <li class="hover-link nav-item" id="sports" onclick="onNavItemClick('sports')">Sports</li>
+                    <li class="hover-link nav-item" id="politics" onclick="onNavItemClick('politics')">Politics</li>
+                    <li class="hover-link nav-item" id="economic" onclick="onNavItemClick('economic')">Economic</li>
+                    <li class="hover-link nav-item" id="entertainment" onclick="onNavItemClick('entertainment')">Entertainment</li>
+                    <li class="dropdown">
+                        <select id="language-select" onchange="changeLanguage()">
+                            <option value="en">English</option>
+                            <option value="fr">French</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div class="search-bar flex">
+                <input id="search-text" type="text" class="news-input" placeholder="e.g. Science">
+                <button id="search-button" class="search-button" onclick="searchNews()">Search</button>
+            </div>
+            <div id="login-btn">
+                {% if user %}
+                    <img src="{{ url_for('static', filename='images/user.png')}}" class="user-pic" alt="User Profile" onclick="toggleMenu()">
+                    <div class="sub-menu-wrap" id="submenu">
+                        <div class="sub-menu">
+                            <div class="user-info">
+                             <!--    <img src="{{ url_for('static', filename='images/user.png')}}" alt="User">
+                                <h3>{{ user }}</h3>
+                            </div>
+                            <hr>
+                            <h4>User History</h4>
+                            {% if history.shape[0] > 0 %}
+                                <ul>
+                                    {% for index, row in history.iterrows() %}
+                                        <li>{{ row['article_title'] }} ({{ row['category'] }})</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No history available</p>
+                            {% endif %}
+                            <a href="#" class="sub-menu-link">
+                                <img src="{{ url_for('static', filename='images/profile.png')}}" alt="Edit Profile">
+                                <p>Edit Profile</p>
+                                <span>&gt;</span>           
+                            </a>
+
+                            <a href="#" class="sub-menu-link" onclick="logout()">
+                                <img src="{{ url_for('static', filename='images/logout.png')}}" alt="Logout">
+                                <p>Logout</p>
+                                <span>&gt;</span>           
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <button id="btn-main-login" onclick="loginRedirect()">Login</button>
+                {% endif %}
+                </div> -->
+            
+            
+
+    </nav>
+    
+    <main>
+        <div class="cards-container container flex" id="cards-container"></div>
+    </main>
+        
+    <template id="template-news-card">
+        <div class="card">
+            <div class="card-header">
+                <img src="https://via.placeholder.com/400x200" alt="news-image" id="news-img">
+            </div>
+            <div class="card-content">
+                <h3 id="news-title">This is the Title</h3>
+                <h6 class="news-source" id="news-source">Source Date</h6>
+                <p class="news-desc" id="news-desc"></p>
+            </div>
+        </div>
+    </template>
+    
+    <script>
+        function loginRedirect() {
+            window.location.href = '/login';
+        }
+
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                user: params.get('user')
+            };
+        }
+
+        function logout() {
+            window.location.href = '/';
+        }
+
+        function searchNews() {
+            const query = document.getElementById('search-text').value;
+            console.log(`Searching for: ${query}`);
+            // Implement actual search functionality here
+        }
+
+        function changeLanguage() {
+            const language = document.getElementById('language-select').value;
+            console.log(`Language changed to: ${language}`);
+            // Implement language change functionality
+        }
+
+        function onNavItemClick(category) {
+            console.log(`Category selected: ${category}`);
+            // Implement navigation logic
+        }
+
+        function reload() {
+            location.reload();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const user = getQueryParams().user;
+            if (user) {
+                document.getElementById('login-btn').innerHTML = `
+                    <img src="{{ url_for('static', filename='images/user.png')}}" class="user-pic" alt="User Profile" onclick="toggleMenu()">
+                    <div class="sub-menu-wrap" id="submenu">
+                        <div class="sub-menu">
+                            <div class="user-info">
+                                <img src="{{ url_for('static', filename='images/user.png')}}" alt="User">
+                                <h3>${user}</h3>
+                            </div>
+                            <hr>
+                            <a href="#" class="sub-menu-link">
+                                <img src="{{ url_for('static', filename='images/profile.png')}}" alt="Edit Profile">
+                                <p>Edit Profile</p>
+                                <span>&gt;</span>           
+                            <a href="#" class="sub-menu-link">
+                                <img src="{{ url_for('static', filename='images/profile.png')}}" alt="User History">
+                                <p>User History</p>
+                                <span>&gt;</span>           
+                            </a>
+                            <a href="#" class="sub-menu-link" onclick="logout()">
+                                <img src="{{ url_for('static', filename='images/logout.png')}}" alt="Logout">
+                                <p>Logout</p>
+                                <span>&gt;</span>           
+                            </a>
+                        </div>
+                    </div>`;
+            } else {
+                document.getElementById('login-btn').innerHTML = `
+                    <button id="btn-main-login" onclick="loginRedirect()">Login</button>`;
+            }
+        });
+
+        function toggleMenu() {
+            const submenu = document.getElementById("submenu");
+            submenu.classList.toggle("open-menu");
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
